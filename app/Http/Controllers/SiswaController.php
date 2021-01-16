@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Siswa;
 use App\User;
 
 class SiswaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index(Request $request)
     {
         $users = User::select('*');
@@ -86,7 +93,7 @@ class SiswaController extends Controller
             $data->email = $email;
         }
         
-        $data->password = $password;
+        $data->password = Hash::make($password);
         $data->save();
 
         return back()->with('message', 'Data Created');
@@ -132,7 +139,7 @@ class SiswaController extends Controller
         $email = $users['email'];
         $password = $users['password'];
 
-        $data = User::find($id);;
+        $data = User::find($id);
         if($name == null){
             $data->name = '-';
         } else {
@@ -160,9 +167,9 @@ class SiswaController extends Controller
         }
 
         if($password == null){
-            $data->password = '-';
+            $data->password = Hash::make('-');
         } else {
-            $data->password = $password;
+            $data->password = Hash::make($password);
         }
 
         $data->save();

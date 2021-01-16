@@ -1,6 +1,6 @@
 @extends('layouts.adminlte')
 
-@section('title', 'Siswa')
+@section('title', 'Guru')
 
 @section('css')
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -10,13 +10,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> --}}
 @endsection
 
-@section('name', 'List Siswa')
+@section('name', 'List Guru')
 
 @section('content')
     <div class="container">
         <div class="main-body">
 
-            <form action="{{ action('SiswaController@index') }}">
+            <form action="{{ action('GuruController@index') }}">
                 <div class="input-group mb-3">        
                     <input type="text" class="form-control" placeholder="Search" aria-span="Search" aria-describedby="basic-addon1" name="search_filter" id="search" value="{{ Request::get('search_filter') }}">
                     <div class="input-group-append">
@@ -106,7 +106,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form id="create" action="{{action('SiswaController@store')}}" method="POST" enctype="multipart/form-data">
+                    <form id="create" action="{{action('GuruController@store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <table class="table">
                             <tr>
@@ -172,7 +172,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form id="update-{{ $user['id'] }}" action="{{action('SiswaController@update', $user['id'])}}" method="POST" enctype="multipart/form-data">
+                    <form id="update-{{ $user['id'] }}" action="{{action('GuruController@update', $user['id'])}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <table class="table">
                             <tr>
@@ -247,7 +247,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form action="{{action('SiswaController@destroy', $user['id'])}}" method="GET" enctype="multipart/form-data">
+                    <form action="{{action('GuruController@destroy', $user['id'])}}" method="GET" enctype="multipart/form-data">
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </form>
                 </div>
