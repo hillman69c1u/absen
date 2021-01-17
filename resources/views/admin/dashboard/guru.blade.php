@@ -1,6 +1,6 @@
 @extends('layouts.adminlte')
 
-@section('title', 'Siswa')
+@section('title', 'Guru')
 
 @section('css')
     {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -10,13 +10,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> --}}
 @endsection
 
-@section('name', 'List Siswa')
+@section('name', 'List Guru')
 
 @section('content')
     <div class="container">
         <div class="main-body">
 
-            <form action="{{ action('SiswaController@index') }}">
+            <form action="{{ action('GuruController@index') }}">
                 <div class="input-group mb-3">        
                     <input type="text" class="form-control" placeholder="Search" aria-span="Search" aria-describedby="basic-addon1" name="search_filter" id="search" value="{{ Request::get('search_filter') }}">
                     <div class="input-group-append">
@@ -32,25 +32,23 @@
                     <table class="table table-striped table-valign-middle">
                         <thead>
                             <tr>
-                                <th scope="col">
+                                <th class="text-center" scope="col">
                                     <span>No</span>
                                 </th>
-                                <th scope="col">
+                                <th class="text-center" scope="col">
                                     <span>Nama</span>
                                 </th>
-                                <th scope="col">
+                                <th class="text-center" scope="col">
                                     <span>Email</span>
                                 </th>
-                                <th scope="col">
-                                    <span>Kelas</span>            
+                                <th class="text-center" scope="col">
+                                    <span>Mata Pelajaran</span>            
                                 </th>
-                                <th scope="col">
-                                    <span>NISN</span>            
+                                <th class="text-center" scope="col">
+                                    <span>NIP</span>            
                                 </th>
-                                <th scope="col">
-                                    <div class="text-center">
-                                        <span>Action</span> 
-                                    </div>
+                                <th class="text-center" scope="col">
+                                    <span>Action</span>
                                 </th>
                             </tr>
                         </thead>
@@ -58,26 +56,24 @@
                         <?php $i=1 ?>
                         @foreach ($users as $user)
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     <span>{{$i++}}</span>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <span name="id-{{$user['name']}}">{{$user['name']}}</span>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <span name="id-{{$user['email']}}">{{$user['email']}}</span>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <span name="id-{{$user['description']}}">{{$user['description']}}</span>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <span name="id-{{$user['nomer_induk']}}">{{$user['nomer_induk']}}</span>
                                 </td>
-                                <td>
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update-modal-{{ $user['id'] }}">Update</button>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update-modal-{{ $user['id'] }}">Update</button>
                                         <button type="button" data-toggle="modal" data-target="#delete-modal-{{ $user['id'] }}" class="btn btn-danger">Delete</button>
-                                    </div>
                                 </td>
                             </tr>
                         @endforeach
@@ -85,14 +81,12 @@
                     </table>
                 </div>
             </div>
-            <br>
-            <br>
-            <div>
+            <div class="mt-5">
                 {{ $users->appends(request()->except('page'))->links() }}
             </div>
-            <br>
-            <br>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-modal">Create</button>
+            <div class="mt-5">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-modal">Create</button>
+            </div>
         </div>
 
         {{-- Create Modal --}}
@@ -106,7 +100,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form id="create" action="{{action('SiswaController@store')}}" method="POST" enctype="multipart/form-data">
+                    <form id="create" action="{{action('GuruController@store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <table class="table">
                             <tr>
@@ -119,7 +113,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span>Kelas</span>
+                                    <span>Mata Pelajaran</span>
                                 </td>
                                 <td>
                                     <input class="form-control" type="text" name="description">
@@ -127,7 +121,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span>NISN</span>
+                                    <span>NIP</span>
                                 </td>
                                 <td>
                                     <input class="form-control" type="text" name="nomer_induk">
@@ -172,7 +166,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <form id="update-{{ $user['id'] }}" action="{{action('SiswaController@update', $user['id'])}}" method="POST" enctype="multipart/form-data">
+                    <form id="update-{{ $user['id'] }}" action="{{action('GuruController@update', $user['id'])}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <table class="table">
                             <tr>
@@ -185,7 +179,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span>Kelas</span>
+                                    <span>Mata Pelajaran</span>
                                 </td>
                                 <td>
                                     <input class="form-control" type="text" name="description" value="{{$user['description']}}">
@@ -193,7 +187,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <span>NISN</span>
+                                    <span>NIP</span>
                                 </td>
                                 <td>
                                     <input class="form-control" type="text" name="nomer_induk" value="{{$user['nomer_induk']}}">
@@ -247,7 +241,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form action="{{action('SiswaController@destroy', $user['id'])}}" method="GET" enctype="multipart/form-data">
+                    <form action="{{action('GuruController@destroy', $user['id'])}}" method="GET" enctype="multipart/form-data">
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </form>
                 </div>

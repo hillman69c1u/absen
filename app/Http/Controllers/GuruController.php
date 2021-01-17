@@ -14,7 +14,7 @@ class GuruController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-     public function __construct()
+    public function __construct()
     {
         $this->middleware('admin');
         // $this->middleware('auth');
@@ -34,7 +34,7 @@ class GuruController extends Controller
 
         $users = $users->orderBy("name", "ASC")->paginate(5);
 
-        return view('admin.guru.home', compact('users'));
+        return view('admin.dashboard.guru', compact('users', 'search_filter'));
     }
 
     /**

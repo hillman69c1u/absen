@@ -58,7 +58,7 @@ class HomeController extends Controller
 
         $data = new Absen;
         $data->user_id = $user->id;
-        $data->tanggal = date("Y/m/d");
+        $data->tanggal = date("Y-m-d");
         $data->waktu = date("h:i:s");
         $data->description = $description;
         $data->save();

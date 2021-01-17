@@ -24,6 +24,8 @@ Route::prefix("admin")->middleware(['auth','admin'])->group(function() {
     Route::post('/siswa/create', 'SiswaController@store');
     Route::post('/siswa/update/{id}', 'SiswaController@update');
     Route::get('/siswa/delete/{id}', 'SiswaController@destroy');
+    Route::get('/absen-guru', 'AbsenGuruController@index');
+    Route::get('/absen-siswa', 'AbsenSiswaController@index');
 });
 
 Route::middleware('auth')->group(function() {
@@ -34,4 +36,4 @@ Route::middleware('auth')->group(function() {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

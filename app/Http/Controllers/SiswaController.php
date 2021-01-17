@@ -34,7 +34,7 @@ class SiswaController extends Controller
 
         $users = $users->orderBy("name", "ASC")->paginate(5);
 
-        return view('admin.siswa.home', compact('users'));
+        return view('admin.dashboard.siswa', compact('users', 'search_filter'));
         // return dd($siswas);
     }
 
